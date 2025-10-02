@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 from products import Product
 
 
@@ -29,12 +29,18 @@ class Store:
         """Return all active products in the store."""
         return [p for p in self.products if p.is_active()]
 
-    def order(self, shopping_list: List[tuple]) -> float:
+    def order(self, shopping_list: List[Tuple[Product, int]]) -> float:
         """
         Place an order based on a shopping list of (Product, quantity) tuples.
         Returns total price of the order.
+        Validates that all products are active and in the store.
         """
         total_price = 0
         for product, quantity in shopping_list:
+            if product not in self.products:
+                raise ValueError(f"Product {product.name} is not available in this store.")
+            if not product.is_active():
+                raise RuntimeError(f"Product {product.name} is not active.")
+
             total_price += product.buy(quantity)
         return total_price

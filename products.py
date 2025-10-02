@@ -20,9 +20,9 @@ class Product:
         self.quantity = quantity
         self.active = True
 
-    def get_quantity(self) -> int:
-        """Return the product quantity."""
-        return self.quantity
+    def get_quantity(self) -> float:
+        """Return the product quantity as float."""
+        return float(self.quantity)
 
     def set_quantity(self, quantity: int):
         """Set the product quantity and deactivate if it reaches 0."""
@@ -44,9 +44,9 @@ class Product:
         """Deactivate the product."""
         self.active = False
 
-    def show(self):
-        """Print product details."""
-        print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+    def show(self) -> str:
+        """Return product details as a string."""
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
 
     def buy(self, quantity: int) -> float:
         """
